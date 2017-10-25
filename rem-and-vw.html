@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>rem布局</title>
+    <title>rem布局——rem+vw</title>
     <style>
         html {
-            font-size: 32px; /* 320/10 */
+            font-size: 10vw; /* width / 10 */
         }
+        @media screen and (min-width: 780px) {
+            html {font-size: 78px} /* 屏幕宽度大于780，不在放大 */
+        }
+
         body {
             font-size: 16px; /* 修正字体大小 */
             /* 防止页面过宽 */
@@ -18,28 +22,17 @@
             /* 防止页面过宽 */
             outline: 1px dashed green;
         }
-
+        /* 字体缩放方案 */
         @media screen and (min-width: 320px) {
-            html {font-size: 32px}
             body {font-size: 16px;}
         }
         @media screen and (min-width: 481px) and (max-width:640px) {
-            html {font-size: 48px}
             body {font-size: 18px;}
         }
         @media screen and (min-width: 641px) {
-            html {font-size: 64px}
             body {font-size: 20px;}
         }
-
-        noscript {
-            display: block;
-            border: 1px solid #d6e9c6;
-            padding: 3px 5px;
-            background: #dff0d8;
-            color: #3c763d;
-        }
-
+        /* 字体缩放方案 */
 
         .p1, .p2 {
             border: 1px solid red;
@@ -50,11 +43,11 @@
             width: 5rem;
             height: 5rem;
 
-            font-size: 1.2em;
+            font-size: 1.2em; /* 字体使用em */
         }
 
         .s1 {
-            font-size: 1.2em;
+            font-size: 1.2em; /* 字体使用em */
         }
 
         .p2 {
@@ -62,13 +55,11 @@
             height: 4rem;
         }
         .s2 {
-            font-size: 1.2em
+            font-size: 1.2em /* 字体使用em */
         }
     </style>
 </head>
 <body>
-    <noscript>开启JavaScript，获得更好的体验</noscript>
-
     <div class="p1">
         宽度为屏幕宽度的50%，字体大小1.2em
         <div class="s1">
@@ -82,19 +73,5 @@
             字体大小1.2em
         </div>
     </div>
-
-    <script>
-        var documentElement = document.documentElement;
-
-        function callback() {
-            var clientWidth = documentElement.clientWidth;
-            // 屏幕宽度大于780，不在放大
-            clientWidth = clientWidth < 780 ? clientWidth : 780;
-            documentElement.style.fontSize = clientWidth / 10 + 'px';
-        }
-
-        document.addEventListener('DOMContentLoaded', callback);
-        window.addEventListener('orientationchange' in window ? 'orientationchange' : 'resize', callback);
-    </script>
 </body>
 </html>
