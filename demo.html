@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问题</title>
+
+    <style>
+        .p1,
+        .p2,
+        .s1,
+        .s2,
+        .s5,
+        .s6 {
+            margin: 1em;
+            border: 1px solid green;
+            padding: 1em;
+        }
+        .p1 {font-size: 16px; line-height: 32px;}
+        .s1 {font-size: 2em;}
+        .s2 {font-size: 2em; line-height: 2em;}
+
+        .p2 {font-size: 16px; line-height: 2;}
+        .s5 {font-size: 2em;}
+        .s6 {font-size: 2em; line-height: 2em;}
+    </style>
+</head>
+<body>
+    <div class="p1">
+        我是p1
+        <div class="s1">我是s1<br></div>
+        <div class="s2">我是s2<br></div>
+    </div>
+    <div class="p2">
+        我是p2
+        <div class="s5">我是s5<br></div>
+        <div class="s6">我是s6<br></div>
+    </div>
+
+    <script>
+        var p1 = document.querySelector('.p1');
+        var p2 = document.querySelector('.p2');
+        var s1 = document.querySelector('.s1');
+        var s2 = document.querySelector('.s2');
+        var s5 = document.querySelector('.s5');
+        var s6 = document.querySelector('.s6');
+
+        var ruleList = document.styleSheets[0].cssRules;
+
+        function renderSetStyle(dom) {
+            var name = '.' + dom.className;
+
+            var arr = [].filter.call(ruleList, (x => x.selectorText === name));
+
+            if (arr.length > 0) {
+                dom.appendChild(document.createTextNode('我的css设置值是：' + arr[0].cssText));
+                dom.appendChild(document.createElement('br'));
+            }
+        }
+
+        function renderComputedStyle(dom) {
+            var cs = getComputedStyle(dom);
+            dom.appendChild(document.createTextNode('我的css计算值是：font-size: ' + cs.fontSize  + '; line-height: ' + cs.lineHeight));
+        }
+
+        renderSetStyle(p1)
+        renderSetStyle(p2)
+        renderSetStyle(s1)
+        renderSetStyle(s2)
+        renderSetStyle(s5)
+        renderSetStyle(s6)
+
+        renderComputedStyle(p1)
+        renderComputedStyle(p2)
+        renderComputedStyle(s1)
+        renderComputedStyle(s2)
+        renderComputedStyle(s5)
+        renderComputedStyle(s6)
+
+    </script>
+</body>
+</html>
